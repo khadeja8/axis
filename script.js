@@ -1,7 +1,6 @@
 // الحصول على كل العناصر
 const links = document.querySelectorAll('.navbar li');
 
-// إضافة حدث عند الضغط
 links.forEach(link => {
   link.addEventListener('click', () => {
     // إزالة active من الكل
