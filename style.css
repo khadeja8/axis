@@ -1,1 +1,38 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #e6e6e6; /* نفس خلفية الصورة */
+  font-family: 'Amiri', serif; /* خط عربي مشابه */
+  display: flex;
+  justify-content: center;
+}
 
+.navbar {
+  margin-top: 20px;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar li {
+  position: relative;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  background-color: #c1c1b8; /* الرمادي الغامق بالأزرار */
+  padding: 12px 35px;
+  border-radius: 50px;
+  font-size: 20px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.navbar li.active a {
+  border: 3px solid #000;
+}
