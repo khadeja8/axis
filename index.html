@@ -17,10 +17,27 @@
     </ul>
   </nav>
 
-  <!-- محتوى كل صفحة -->
+  <!-- محتوى الصفحة الرئيسية -->
   <section id="content">
-    <!-- هنا راح نضيف المحتوى حسب الصفحة لاحقاً -->
+    <div class="home-page">
+      
+      <!-- صندوق الاقتراح -->
+      <div class="suggest-box">
+        <span class="suggest-text">Suggest</span>
+      </div>
+
+      <!-- مربع الكتابة -->
+      <div class="input-container">
+        <input type="text" id="feeling-input" placeholder="بماذا تفكر؟">
+        <button id="send-btn" style="display:none;">▲</button>
+      </div>
+
+      <!-- قائمة الاقتراحات -->
+      <ul id="suggestions-list" class="suggestions"></ul>
+      
+    </div>
   </section>
 
+  <script src="script.js"></script>
 </body>
 </html>
