@@ -1,12 +1,20 @@
-body {
+/* إعادة الضبط */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   background-color: #e6e6e6;
   font-family: 'Amiri', serif;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
+/* شريط التنقل */
 .navbar {
   margin-top: 20px;
 }
@@ -30,20 +38,112 @@ body {
   border-radius: 50px;
   font-size: 20px;
   display: inline-block;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.3s ease;
 }
 
-/* تأثير عند الضغط على الأيقونة */
 .navbar li.active a {
-  transform: scale(1.15) rotate(3deg);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.35), 0 0 15px rgba(255,255,255,0.4) inset;
+  transform: scale(1.1);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
   background: linear-gradient(145deg, #d1d1c8, #a9a99c);
   color: #000;
 }
 
-/* تأثير عند المرور بالماوس */
-.navbar a:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+/* الصفحة الرئيسية */
+.home-page {
+  margin-top: 50px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+
+/* صندوق suggest */
+.suggest-box {
+  display: inline-block;
+  background: #fff;
+  padding: 10px 25px;
+  border-radius: 30px;
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  animation: floatSuggest 2s infinite ease-in-out;
+}
+
+/* حركة بسيطة لصندوق suggest */
+@keyframes floatSuggest {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* حاوية الإدخال */
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #c1c1b8;
+  border-radius: 30px;
+  padding: 10px 15px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.input-container:focus-within {
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
   background-color: #b3b3a9;
+}
+
+/* مربع الكتابة */
+#feeling-input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 18px;
+  background: transparent;
+  text-align: right;
+  font-family: 'Amiri', serif;
+  color: #333;
+}
+
+/* زر الإرسال */
+#send-btn {
+  background-color: #c1c1b8;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#send-btn:hover {
+  background-color: #a9a99c;
+  transform: scale(1.1);
+}
+
+/* قائمة الاقتراحات */
+.suggestions {
+  list-style: none;
+  margin-top: 15px;
+  padding: 0;
+  text-align: right;
+}
+
+.suggestions li {
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 20px;
+  margin: 5px 0;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.suggestions li:hover {
+  background: #ddd;
 }
