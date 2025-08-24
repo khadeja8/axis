@@ -1,47 +1,79 @@
-// script.js
-
-const navButtons = document.querySelectorAll(".nav-btn");
-const screens = document.querySelectorAll(".screen");
-
-// نخزن الواجهة الحالية
-let currentScreen = document.querySelector(".screen.is-visible");
-
-function switchScreen(targetId) {
-  const targetScreen = document.getElementById(targetId);
-
-  if (targetScreen === currentScreen) return; // إذا نفس الواجهة، لا تسوي شي
-
-  // نخفي الواجهة الحالية مع حركة للخروج
-  currentScreen.classList.remove("is-visible");
-  currentScreen.classList.add("slide-out");
-
-  // بعد ما تخلص حركة الخروج، نخفيها نهائي
-  currentScreen.addEventListener("animationend", () => {
-    currentScreen.setAttribute("hidden", "true");
-    currentScreen.classList.remove("slide-out");
-  }, { once: true });
-
-  // نعرض الواجهة الجديدة مع حركة للدخول
-  targetScreen.removeAttribute("hidden");
-  targetScreen.classList.add("slide-in");
-
-  targetScreen.addEventListener("animationend", () => {
-    targetScreen.classList.remove("slide-in");
-    targetScreen.classList.add("is-visible");
-    currentScreen = targetScreen; // تحديث الشاشة الحالية
-  }, { once: true });
+display:flex;
+  align-items:center;
+  padding: 0 34px;
+  font-size: clamp(18px, 2.2vw, 28px);
+  color: rgba(0,0,0,.62);
+  letter-spacing:.6px;
+  box-shadow: var(--shadow);
+  position:relative;
 }
 
-// إضافة Event Listener لكل زر
-navButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    navButtons.forEach(b => b.classList.remove("is-active"));
-    btn.classList.add("is-active");
+/* تأثير ضغط عند التركيز كأنه إدخال */
+.think-box:focus,
+.think-box:focus-visible{
+  outline:none;
+  box-shadow: inset 0 0 0 3px rgba(0,0,0,.2), var(--shadow);
+  color:#222;
+}
 
-    const target = btn.getAttribute("data-target");
-    switchScreen(target);
-  });
-});
+/* =========================
+   تجاوبية
+   ========================= */
+@media (max-width: 820px){
+  .top-nav{gap:16px}
+  .nav-btn{padding:12px 22px}
+  .fab-toggle{width:70px; height:70px}
+  .think-box{min-height:74px}
+}
 
-// افتراضياً نعرض الرئيسية
-switchScreen("home");
+@media (max-width: 520px){
+  .app{margin-top:20px}
+  .top-nav{
+    justify-content:space-between;
+  }
+  .nav-btn{
+    flex:1 1 auto;
+    text-align:center;
+    padding:12px 16px;
+  }
+  .think-row{
+    flex-direction: column;
+    gap:14px;
+  }
+  .fab-toggle{order:2}
+  .think-box{order:1; width:100%}
+}
+
+/* =========================
+   الحركات (Animations)
+   ========================= */
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: translateX(100px); /* يدخل من اليمين */
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to { 
+    opacity: 0;
+    transform: translateX(-100px); /* يطلع لليسار */
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.4s ease forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.4s ease forwards;
+}
