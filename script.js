@@ -82,3 +82,33 @@ class HelpScreen extends StatelessWidget {
     return Center(child: Text("Help Screen"));
   }
 }
+// -------------------------------
+// الكود الأصلي مال البارحة (خليه مثل ما هو)
+// -------------------------------
+
+// اذا عندك اكواد من قبل لا تمسحها، بس خلهه فوق
+// مثلاً:
+// console.log("Script.js is connected!");
+
+
+// -------------------------------
+// الإضافة الجديدة (تأثير على صورة محمود)
+// -------------------------------
+
+// نجيب الصورة من الصفحة (انت مستخدم الكلاس مال css)
+const mahmoodImg = document.querySelector('.mahmood-photo');
+
+// نتأكد إذا موجودة الصورة قبل نسوي أي شي
+if (mahmoodImg) {
+  // إذا المستخدم ضغط على الصورة
+  mahmoodImg.addEventListener('click', () => {
+    // تكبر الصورة مؤقتاً
+    mahmoodImg.style.transform = 'scale(1.1)';
+    mahmoodImg.style.transition = 'transform 0.3s ease';
+
+    // بعد نص ثانية ترجع للوضع الطبيعي
+    setTimeout(() => {
+      mahmoodImg.style.transform = 'scale(1)';
+    }, 300);
+  });
+}
