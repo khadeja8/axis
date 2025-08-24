@@ -1,88 +1,172 @@
 :root{
+  /* ألوان من الصورة */
   --bg:#eeeeee;
-  --surface:#fff;
-  --accent:#bfc3b3;
-  --active-glow:0 0 18px rgba(0,0,0,.25);
-  --shadow:0 4px 12px rgba(0,0,0,.1);
+  --chip:#bfc3b3;       /* الأزرار/الصناديق الزيتية */
+  --chip-2:#c6cabb;     /* درجة أفتح */
+  --text:#111;
+  --muted:#666;
+
+  --shadow-soft:0 6px 18px rgba(0,0,0,.08);
+  --shadow-strong:0 10px 28px rgba(0,0,0,.16), 0 3px 8px rgba(0,0,0,.10);
+
+  --r-pill: 48px;
 }
 
+*{box-sizing:border-box}
+html,body{height:100%}
 body{
   margin:0;
-  font-family:"Tajawal", sans-serif;
   background:var(--bg);
-  color:#222;
+  color:var(--text);
+  font-family:"Tajawal", system-ui, -apple-system, sans-serif;
 }
 
-/* الحاوية */
-.app{max-width:800px;margin:20px auto;padding:0 16px}
+/* الحاوية العامة */
+.app{
+  max-width: 1120px;
+  margin: 20px auto;
+  padding: 0 18px;
+}
 
-/* التنقّل */
+/* =========================
+   شريط التنقل (نصوص فقط)
+   ========================= */
 .top-nav{
   display:flex;
   justify-content:center;
-  gap:24px;
-  margin-bottom:40px;
-}
-.nav-btn{
-  background:var(--surface);
-  border:none;
-  padding:14px;
-  border-radius:50%;
-  box-shadow:var(--shadow);
-  cursor:pointer;
-  transition:.3s;
-  font-size:20px;
-}
-.nav-btn.is-active{
-  background:var(--accent);
-  box-shadow:var(--active-glow);
+  gap: clamp(12px, 3vw, 28px);
+  flex-wrap: wrap;
+  margin-bottom: clamp(20px, 4vh, 36px);
 }
 
-/* الشاشات */
+.nav-btn{
+  appearance:none;
+  border: none;
+  background: var(--chip);
+  color:#000;
+  font-weight:700;
+  font-size: clamp(18px, 2.2vw, 30px);
+  padding: 12px clamp(18px, 3vw, 36px);
+  border-radius: 60px;
+  box-shadow: var(--shadow-soft);
+  cursor:pointer;
+  transition: transform .16s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.nav-btn:hover{ transform: translateY(-2px); box-shadow: var(--shadow-strong); }
+
+/* حالة مفعّلة = بدون إطار أسود، مع توهج/ظل خفيف */
+.nav-btn.is-active{
+  background: var(--chip-2);
+  box-shadow: 0 0 0 0 rgba(0,0,0,0), 0 0 24px rgba(0,0,0,.16);
+}
+
+/* =========================
+   منطقة الشاشات بسكرول ثابت
+   ========================= */
+/* نستخدم 100svh حتى يكون ثابت على iOS/Android وقت ظهور الكيبورد */
+.screens{
+  height: calc(100svh - 120px); /* نخصم تقريب ارتفاع النافبار */
+  min-height: 480px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 28px;
+}
+
 .screen{display:none}
 .screen.is-visible{display:block}
 
-/* اقتراحات */
+.container{padding:16px}
+
+/* =========================
+   الفقاعات (ردود)
+   ========================= */
+.bubble-feed{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 14px;
+  margin-top: clamp(12px, 2vh, 18px);
+  margin-bottom: clamp(12px, 3vh, 22px);
+}
+
+.bubble-row{display:flex;justify-content:center;width:100%}
+.bubble{
+  background:#fff;
+  color:#000;
+  font-size: clamp(18px, 2.1vw, 28px);
+  padding: 12px 26px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-soft);
+  position:relative;
+}
+.bubble::after{
+  content:"";
+  position:absolute;
+  right:-14px; top:50%; transform:translateY(-50%);
+  border: 12px solid transparent;
+  border-left-color:#fff;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.08));
+}
+
+/* =========================
+   الاقتراحات (5)
+   ========================= */
 .suggest-row{
   display:flex;
   justify-content:center;
-  gap:12px;
-  margin-bottom:20px;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin-bottom: clamp(12px, 3vh, 20px);
 }
 .suggest{
-  background:var(--surface);
-  padding:10px 18px;
-  border-radius:20px;
-  box-shadow:var(--shadow);
+  background: var(--chip);
+  border: none;
+  color:#000;
+  padding: 10px 18px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-soft);
   cursor:pointer;
-  transition:.3s;
+  font-size: clamp(14px, 1.8vw, 18px);
+  transition: background .2s ease, box-shadow .2s ease, transform .12s ease;
 }
-.suggest:hover{background:var(--accent)}
+.suggest:hover{ background: var(--chip-2); box-shadow: var(--shadow-strong); transform: translateY(-1px); }
 
-/* خانة البحث */
-.think-row{
+/* =========================
+   مربع الكتابة + زر التثبيت
+   ========================= */
+.think-wrap{
+  /* يتمركز عموديًا بالافتراضي */
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
+  gap: 14px;
+  margin-top: clamp(24px, 16vh, 28vh); /* يحطّه بمنتصف الشاشة تقريبًا */
 }
+
 .think-input{
-  flex:1;
-  max-width:600px;
-  padding:14px 20px;
-  border-radius:30px;
-  border:none;
-  font-size:16px;
-  box-shadow:var(--shadow);
-  outline:none;
+  width: min(760px, 90%);
+  min-height: 78px;
+  padding: 0 26px;
+  border: none;
+  border-radius: 999px;
+  outline: none;
+  background: var(--chip);
+  color: rgba(0,0,0,.7);
+  font-size: clamp(18px, 2.1vw, 26px);
+  box-shadow: var(--shadow-soft);
 }
-.send-btn{
-  width:50px;height:50px;
-  border:none;
-  border-radius:50%;
-  background:var(--accent);
-  display:grid;place-items:center;
-  font-size:18px;
+
+/* زر التثبيت (نفس الدائرة في الصورة) */
+.confirm-btn{
+  width: 86px; height: 86px;
+  border-radius: 50%;
+  border: none;
+  background: var(--chip);
+  display:grid; place-items:center;
+  font-size: 26px; color:#3a3a3a;
+  box-shadow: var(--shadow-soft);
   cursor:pointer;
-  box-shadow:var(--shadow);
+  transition: transform .12s ease, box-shadow .2s ease, background .2s ease;
 }
+.
