@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AXIS | الرئيسية</title>
 
-  <!-- خطوط + أيقونات (اختياري) -->
+  <!-- خطوط + أيقونات -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
@@ -16,7 +16,7 @@
 
   <div class="app">
 
-    <!-- شريط التنقّل (أيقونات الواجهات) -->
+    <!-- شريط التنقّل -->
     <nav class="top-nav" aria-label="التنقّل الرئيسي">
       <button class="nav-btn is-active" data-target="home" aria-current="page">الرئيسية</button>
       <button class="nav-btn" data-target="idea">الفكرة</button>
@@ -31,17 +31,17 @@
       <section id="home" class="screen is-visible" aria-labelledby="home-title">
         <h1 id="home-title" class="sr-only">الرئيسية</h1>
 
-        <!-- فقاعة مقترح -->
-        <div class="bubble-row" aria-live="polite">
-          <div class="bubble bubble--reply">Suggest</div>
+        <!-- فقاعة -->
+        <div class="bubble-row">
+          <div class="bubble">Suggest</div>
         </div>
 
-        <!-- صندوق "بماذا تُفكّر؟" مع زر السهم -->
+        <!-- صندوق التفكير -->
         <div class="think-row">
           <button class="fab-toggle" aria-label="عرض/إخفاء">
             <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
           </button>
-          <div class="think-box" role="textbox" aria-label="بماذا تُفكّر؟">بِماذا تُفكّر؟</div>
+          <div class="think-box">بماذا تُفكّر؟</div>
         </div>
       </section>
 
@@ -74,6 +74,6 @@
   </div>
 
   <!-- ملف السكربت -->
-  <script defer src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
