@@ -1,48 +1,47 @@
-// ------------------------------
-// تبديل الصفحات
-// ------------------------------
-const navLinks = document.querySelectorAll('.navbar li a');
-const screens = document.querySelectorAll('.screen');
+// script.js
 
-navLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
+const navButtons = document.querySelectorAll(".nav-btn");
+const screens = document.querySelectorAll(".screen");
 
-    // إزالة active من الكل
-    navLinks.forEach(l => l.parentElement.classList.remove('active'));
-    // إضافة active للرابط الحالي
-    link.parentElement.classList.add('active');
+// نخزن الواجهة الحالية
+let currentScreen = document.querySelector(".screen.is-visible");
 
-    // جلب الـ id (home, notebook, about, contact)
-    const target = link.getAttribute('id');
+function switchScreen(targetId) {
+  const targetScreen = document.getElementById(targetId);
 
-    // إخفاء كل الشاشات
-    screens.forEach(screen => {
-      screen.style.display = 'none';
-    });
+  if (targetScreen === currentScreen) return; // إذا نفس الواجهة، لا تسوي شي
 
-    // إظهار الشاشة المطلوبة
-    const targetScreen = document.querySelector(`[data-screen="${target}"]`);
-    if (targetScreen) {
-      targetScreen.style.display = 'block';
-    }
+  // نخفي الواجهة الحالية مع حركة للخروج
+  currentScreen.classList.remove("is-visible");
+  currentScreen.classList.add("slide-out");
+
+  // بعد ما تخلص حركة الخروج، نخفيها نهائي
+  currentScreen.addEventListener("animationend", () => {
+    currentScreen.setAttribute("hidden", "true");
+    currentScreen.classList.remove("slide-out");
+  }, { once: true });
+
+  // نعرض الواجهة الجديدة مع حركة للدخول
+  targetScreen.removeAttribute("hidden");
+  targetScreen.classList.add("slide-in");
+
+  targetScreen.addEventListener("animationend", () => {
+    targetScreen.classList.remove("slide-in");
+    targetScreen.classList.add("is-visible");
+    currentScreen = targetScreen; // تحديث الشاشة الحالية
+  }, { once: true });
+}
+
+// إضافة Event Listener لكل زر
+navButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    navButtons.forEach(b => b.classList.remove("is-active"));
+    btn.classList.add("is-active");
+
+    const target = btn.getAttribute("data-target");
+    switchScreen(target);
   });
 });
 
-// ------------------------------
-// تأثير على صورة محمود درويش
-// ------------------------------
-const mahmoodImg = document.querySelector('.mahmood-photo');
-
-if (mahmoodImg) {
-  mahmoodImg.addEventListener('click', () => {
-    // تكبير بسيط عند الضغط
-    mahmoodImg.style.transform = 'scale(1.1)';
-    mahmoodImg.style.transition = 'transform 0.3s ease';
-
-    // ترجع للوضع الطبيعي بعد 300ms
-    setTimeout(() => {
-      mahmoodImg.style.transform = 'scale(1)';
-    }, 300);
-  });
-}
+// افتراضياً نعرض الرئيسية
+switchScreen("home");
