@@ -1,81 +1,42 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AXIS | الرئيسية</title>
+لا يقدم إجابات جاهزة؛
+        بل يفتح لك باب الأسئلة ويحتفظ برحلتك الفكرية في مفكرتك الخاصة.
+      </p>
+      <!-- يمكنك لاحقاً استبدال النص بالمحتوى الكامل -->
+    </article>
+  </section>
 
-  <!-- خط + أيقونات -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <!-- تواصل معنا -->
+  <section id="contact" aria-labelledby="contact-title" hidden>
+    <h2 id="contact-title">تواصل معنا</h2>
+    <figure class="owner">
+      <img src="assets/owner.jpg" alt="خديجة جواد - صاحبة فكرة وبرمجة AXIS" />
+      <figcaption>خديجة جواد</figcaption>
+    </figure>
+    <ul class="contact-list">
+      <li><a href="mailto:you@example.com">you@example.com</a></li>
+      <li><a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a></li>
+      <!-- أضِيفي أي قنوات تواصل أخرى -->
+    </ul>
+  </section>
 
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  <!-- ملاحظات إمكانية الوصول -->
+  <footer>
+    <small>© <span id="year">2025</span> AXIS</small>
+  </footer>
 
-  <div class="app">
+  <!-- أماكن ربط الملفات لاحقاً -->
+  <!-- <link rel="stylesheet" href="styles.css" /> -->
+  <!-- <script src="app.js" defer></script> -->
 
-    <!-- شريط التنقّل (نصوص فقط) -->
-    <nav class="top-nav" aria-label="التنقّل الرئيسي">
-      <button class="nav-btn is-active" data-target="home" aria-current="page">الرئيسية</button>
-      <button class="nav-btn" data-target="idea">الفكرة</button>
-      <button class="nav-btn" data-target="about">عن AXIS</button>
-      <button class="nav-btn" data-target="contact">تواصل معنا</button>
-    </nav>
-
-    <!-- منطقة الشاشات: ارتفاع ثابت مع سكرول -->
-    <main class="screens" id="screens" tabindex="-1">
-
-      <!-- الرئيسية -->
-      <section id="home" class="screen is-visible" aria-labelledby="home-title">
-        <h1 id="home-title" class="sr-only">الرئيسية</h1>
-
-        <!-- تغذية الفقاعات (الردود) -->
-        <div id="bubbleFeed" class="bubble-feed">
-          <!-- فقاعة أولية مثل الصورة -->
-          <div class="bubble-row">
-            <div class="bubble">Suggest</div>
-          </div>
-        </div>
-
-        <!-- اقتراحات (5) -->
-        <div class="suggest-row">
-          <button class="suggest">فكرة</button>
-          <button class="suggest">مشروع</button>
-          <button class="suggest">خطة</button>
-          <button class="suggest">تجربة</button>
-          <button class="suggest">ملاحظة</button>
-        </div>
-
-        <!-- مربع الكتابة + زر التثبيت -->
-        <div class="think-wrap" id="thinkWrap">
-          <button id="confirmBtn" class="confirm-btn" title="تثبيت" hidden>
-            <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
-          </button>
-
-          <input type="text" id="thinkInput" class="think-input" placeholder="بماذا تُفكّر؟" inputmode="text" />
-        </div>
-      </section>
-
-      <!-- الفكرة -->
-      <section id="idea" class="screen" hidden>
-        <div class="container"><p>هنا محتوى صفحة الفكرة…</p></div>
-      </section>
-
-      <!-- عن AXIS -->
-      <section id="about" class="screen" hidden>
-        <div class="container"><p>هنا تعريف موجز عن AXIS…</p></div>
-      </section>
-
-      <!-- تواصل معنا -->
-      <section id="contact" class="screen" hidden>
-        <div class="container"><p>هنا وسائل التواصل والنموذج…</p></div>
-      </section>
-
-    </main>
-
-  </div>
-
-  <script src="script.js"></script>
+  <!-- أداة لقرّاء الشاشة لإخفاء العناصر بصرياً فقط -->
+  <style>
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0);
+      white-space: nowrap; border: 0;
+    }
+  </style>
 </body>
 </html>
