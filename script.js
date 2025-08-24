@@ -1,107 +1,94 @@
-// التنقّل بين الشاشات
-const navButtons = document.querySelectorAll(".nav-btn");
-const screens = document.querySelectorAll(".screen");
-let currentScreen = document.querySelector(".screen.is-visible");
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("thought-input");
+  const sendBtn = document.getElementById("send-btn");
+  const suggestions = document.querySelectorAll(".suggest-chip");
 
-function switchScreen(targetId) {
-  const target = document.getElementById(targetId);
-  if (target === currentScreen) return;
-
-  // خروج ودخول بحركة يمين/يسار
-  currentScreen.classList.remove("is-visible");
-  currentScreen.classList.add("slide-out");
-  currentScreen.addEventListener("animationend", () => {
-    currentScreen.classList.remove("slide-out");
-    currentScreen.setAttribute("hidden","true");
-  }, { once:true });
-
-  target.removeAttribute("hidden");
-  target.classList.add("slide-in");
-  target.addEventListener("animationend", () => {
-    target.classList.remove("slide-in");
-    target.classList.add("is-visible");
-    currentScreen = target;
-  }, { once:true });
-}
-
-navButtons.forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    navButtons.forEach(b=>b.classList.remove("is-active"));
-    btn.classList.add("is-active");
-    switchScreen(btn.getAttribute("data-target"));
-  });
-});
-
-// عناصر الرئيسية
-const thinkInput = document.getElementById("thinkInput");
-const confirmBtn = document.getElementById("confirmBtn");
-const bubbleFeed = document.getElementById("bubbleFeed");
-const suggests = document.querySelectorAll(".suggest");
-const thinkWrap = document.getElementById("thinkWrap");
-
-// إظهار زر التثبيت فقط عند وجود نص
-function toggleConfirm(){
-  confirmBtn.hidden = thinkInput.value.trim() === "";
-}
-thinkInput.addEventListener("input", toggleConfirm);
-
-// الضغط على اقتراح → يكتب بالحقل ويظهر الزر
-suggests.forEach(s=>{
-  s.addEventListener("click", ()=>{
-    thinkInput.value = s.textContent.trim();
-    toggleConfirm();
-    thinkInput.focus();
-  });
-});
-
-// زر التثبيت → يضيف فقاعة رد فوق، مثل روبوت محادثة
-confirmBtn.addEventListener("click", ()=>{
-  const txt = thinkInput.value.trim();
-  if (!txt) return;
-
-  // إضافة فقاعة رد بما كتبه المستخدم (أو المختار)
-  const row = document.createElement("div");
-  row.className = "bubble-row";
-  const b = document.createElement("div");
-  b.className = "bubble";
-  b.textContent = txt;
-  row.appendChild(b);
-  bubbleFeed.appendChild(row);
-
-  // تنظيف الحقل وإخفاء الزر
-  thinkInput.value = "";
-  toggleConfirm();
-
-  // سكرول هادئ للأسفل حتى تشوف الفقاعة
-  row.scrollIntoView({ behavior: "smooth", block: "center" });
-});
-
-// جعل الحقل بالمنتصف افتراضيًا ثم يصعد مع الكيبورد
-// يعمل على iOS/Android وحديث المتصفحات عبر visualViewport
-(function handleKeyboardLift(){
-  if (!window.visualViewport) return;
-  const baseMargin = getComputedStyle(thinkWrap).marginTop;
-
-  function update(){
-    // لما يطلع الكيبورد تصغر الـviewport height
-    const vh = window.visualViewport.height;
-    // إذا صغر بشكل ملحوظ، ارفع الحقل
-    if (vh < window.innerHeight * 0.8){
-      thinkWrap.style.marginTop = "6vh";
+  // 🟢 وظيفة: تحديث حالة زر الإرسال
+  function updateSendBtn() {
+    if (input.value.trim().length > 0) {
+      sendBtn.hidden = false;
+      sendBtn.setAttribute("aria-hidden", "false");
     } else {
-      thinkWrap.style.marginTop = baseMargin; // يرجع للوسط
+      sendBtn.hidden = true;
+      sendBtn.setAttribute("aria-hidden", "true");
     }
   }
-  window.visualViewport.addEventListener("resize", update);
-  window.visualViewport.addEventListener("scroll", update);
-})();
 
-// فوكس تلقائي عند النقر داخل منطقة الإدخال
-thinkWrap.addEventListener("click", (e)=>{
-  if (e.target !== thinkInput && e.target !== confirmBtn){
-    thinkInput.focus();
+  // عند الكتابة داخل الحقل
+  input.addEventListener("input", updateSendBtn);
+
+  // عند اختيار اقتراح
+  suggestions.forEach(chip => {
+    chip.addEventListener("click", () => {
+      input.value = chip.dataset.value;
+      updateSendBtn();
+      input.focus();
+    });
+  });
+
+  // عند الضغط على زر الإرسال
+  sendBtn.addEventListener("click", () => {
+    const value = input.value.trim();
+    if (!value) return;
+
+    // مثال: عرض النتيجة داخل قسم النتائج
+    const results = document.querySelector(".results");
+    results.hidden = false;
+
+    // إنشاء بطاقة جديدة (تجريبية – لاحقاً تربطيها بالبيانات الحقيقية)
+    const card = document.createElement("article");
+    card.className = "result-card";
+    card.innerHTML = `
+      <h2 class="result-title">${value}</h2>
+      <blockquote class="result-quote">هنا اقتباس فلسفي/مقولة مناسبة لـ "${value}".</blockquote>
+      <p class="result-explainer">شرح موجز أو تفسير للفكرة المرتبطة بـ ${value}.</p>
+      <div class="result-question">
+        <h3>سؤال للتفكير</h3>
+        <p>ما الذي تعلّمته من هذا الشعور اليوم؟</p>
+        <button type="button" class="save-to-notebook">حفظ في المفكرة</button>
+      </div>
+    `;
+    results.prepend(card);
+
+    // تفريغ الحقل وإخفاء الزر
+    input.value = "";
+    updateSendBtn();
+  });
+
+  // 🟢 نظام التنقل (بين الأقسام)
+  const navLinks = document.querySelectorAll(".nav-link");
+  const sections = document.querySelectorAll("main, section[id]");
+
+  function showSection(targetId) {
+    sections.forEach(sec => {
+      sec.hidden = sec.id !== targetId && sec.tagName.toLowerCase() !== "main";
+      if (sec.tagName.toLowerCase() === "main" && targetId === "home") {
+        sec.hidden = false;
+      }
+    });
+
+    // تحديث حالة الرابط النشط
+    navLinks.forEach(link => {
+      if (link.getAttribute("href") === `#${targetId}`) {
+        link.classList.add("is-active");
+      } else {
+        link.classList.remove("is-active");
+      }
+    });
+
+    // التركيز على القسم الجديد (تحسين الوصول)
+    const target = document.getElementById(targetId);
+    if (target) target.focus();
   }
-});
 
-// افتراضياً: إخفاء زر التثبيت بالبداية
-toggleConfirm();
+  navLinks.forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const targetId = link.getAttribute("href").slice(1);
+      showSection(targetId);
+    });
+  });
+
+  // افتراضياً: عرض الرئيسية
+  showSection("home");
+});
