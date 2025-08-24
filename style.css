@@ -1,32 +1,129 @@
-/* الأساسيات القديمة الي عندنا */
+/* الأساسيات */
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Amiri", serif;
   margin: 0;
   padding: 0;
   background-color: #f9f9f9;
-}
-
-/* العنوان الرئيسي */
-h1 {
-  text-align: center;
-  margin-top: 20px;
+  line-height: 1.8;
   color: #333;
 }
 
-/* الصورة الجديدة مال محمود */
-.mahmood-photo {
-  display: block;
-  margin: 20px auto;
-  width: 300px;       /* تكدر تغير الحجم حسب رغبتك */
-  height: auto;       /* حتى يحافظ على التناسب */
-  border-radius: 15px; /* يخلي الاطراف ناعمة */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* ظل بسيط */
-  border: 2px solid #ccc; /* اطار ناعم */
+/* شريط التنقل */
+.navbar {
+  margin: 0;
+  padding: 15px 0;
+  background: #c1c1b8;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-/* باقي التنسيقات الي عندنا من البارحة */
-p {
-  text-align: center;
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.navbar li {
+  position: relative;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  background: #e0e0da;
+  padding: 10px 25px;
+  border-radius: 50px;
   font-size: 18px;
-  color: #555;
+  transition: all 0.3s ease;
+}
+
+.navbar li.active a,
+.navbar a:hover {
+  background: linear-gradient(145deg, #d1d1c8, #a9a99c);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  transform: scale(1.05);
+}
+
+/* محتوى الصفحة */
+#content {
+  padding: 30px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* عناوين */
+h1, h2 {
+  color: #222;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* نصوص */
+.about-body p {
+  margin-bottom: 15px;
+  text-align: justify;
+  font-size: 18px;
+}
+
+.about-body ul {
+  margin: 10px 0 20px 0;
+  padding: 0 20px;
+}
+
+.about-body li {
+  margin-bottom: 10px;
+}
+
+/* صورة محمود درويش */
+.darwish-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.mahmood-photo {
+  width: 300px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3),
+              0 0 20px rgba(255,255,255,0.4) inset;
+  transform: perspective(1000px) rotateY(0deg);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.mahmood-photo:hover {
+  transform: perspective(1000px) rotateY(8deg) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5),
+              0 0 25px rgba(255,255,255,0.5) inset;
+}
+
+/* اقتباس */
+blockquote {
+  font-style: italic;
+  background: #f0f0f0;
+  padding: 15px 20px;
+  border-right: 5px solid #999;
+  margin: 20px auto;
+  border-radius: 8px;
+  font-size: 18px;
+  max-width: 700px;
+}
+
+/* استجابة للشاشات الصغيرة */
+@media (max-width: 600px) {
+  .mahmood-photo {
+    width: 90%;
+  }
+  body {
+    font-size: 16px;
+  }
+  .navbar a {
+    padding: 8px 15px;
+    font-size: 16px;
+  }
 }
