@@ -1,30 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Flutter Web App</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#000000">
-  <meta name="description" content="A new Flutter project.">
-</head>
-<body>
-  <script src="flutter.js" defer></script>
-  <script>
-    window.addEventListener('load', function(ev) {
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: null,
-        }
-      }).then(function(engineInitializer) {
-        return engineInitializer.initializeEngine();
-      }).then(function(appRunner) {
-        return appRunner.runApp();
-      });
-    });
-  </script>
+/* الأساسيات القديمة الي عندنا */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
 
-  <!-- هاي الإضافة حتى صورة محمود تشتغل -->
-  <img src="assets/mahmood photo.png" alt="Mahmood Photo" width="300">
+/* العنوان الرئيسي */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+}
 
-</body>
-</html>
+/* الصورة الجديدة مال محمود */
+.mahmood-photo {
+  display: block;
+  margin: 20px auto;
+  width: 300px;       /* تكدر تغير الحجم حسب رغبتك */
+  height: auto;       /* حتى يحافظ على التناسب */
+  border-radius: 15px; /* يخلي الاطراف ناعمة */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* ظل بسيط */
+  border: 2px solid #ccc; /* اطار ناعم */
+}
+
+/* باقي التنسيقات الي عندنا من البارحة */
+p {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+}
