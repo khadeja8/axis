@@ -1,87 +1,79 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Axis</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXIS | الرئيسية</title>
+
+  <!-- خطوط + أيقونات (اختياري) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <!-- ملف التنسيقات -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- شريط التنقل -->
-  <nav class="navbar">
-    <ul>
-      <li class="active"><a href="#" id="home">الرئيسية</a></li>
-      <li><a href="#" id="notebook">المفكرة</a></li>
-      <li><a href="#" id="about">عن AXIS</a></li>
-      <li><a href="#" id="contact">تواصل معنا</a></li>
-    </ul>
-  </nav>
+  <div class="app">
 
-  <!-- منطقة المحتوى -->
-  <section id="content">
+    <!-- شريط التنقّل (أيقونات الواجهات) -->
+    <nav class="top-nav" aria-label="التنقّل الرئيسي">
+      <button class="nav-btn is-active" data-target="home" aria-current="page">الرئيسية</button>
+      <button class="nav-btn" data-target="idea">الفكرة</button>
+      <button class="nav-btn" data-target="about">عن AXIS</button>
+      <button class="nav-btn" data-target="contact">تواصل معنا</button>
+    </nav>
 
-    <!-- الصفحة الرئيسية -->
-    <div class="screen home-page" data-screen="home">
-      <!-- المحتوى يتكمل لاحقاً -->
-    </div>
+    <!-- منطقة الشاشات -->
+    <main class="screens" id="screens" tabindex="-1">
 
-    <!-- صفحة عن AXIS -->
-    <article class="screen about-page" data-screen="about">
-      <header>
-        <h1>عن Axis</h1>
-      </header>
+      <!-- شاشة: الرئيسية -->
+      <section id="home" class="screen is-visible" aria-labelledby="home-title">
+        <h1 id="home-title" class="sr-only">الرئيسية</h1>
 
-      <div class="about-body">
-        <p>
-          مشروع <strong>Axis</strong> : هو موقع فلسفي تحليلي صُمّم ليكون أداة للتفكير، لا للإجابة، حيثُ لا يُحدد للمستخدم ما إذا كان ما يعيشه “حقيقة” أو “وهم”، بل يضعه في منطقة وسطى تُسمى بـ”المحور”، حيث يستنتج بنفسه أجوبة تساؤلاته.
-        </p>
-
-        <p>
-          يكتب المستخدم موقفًا أو شعورًا لم يفهمه او يواجه مُشكلة في التعامل معه، ما إن يكتب شعوره حتى يُقابل باقتباس فلسفي يُحاكي حالته، ومقولة من أقوال الإمام علي (عليه السلام) ترتبط بجوهر مشكلته مع شرح معنى القول . هكذا يتقاطع صوت الفكر الإنساني مع الحكمة العلوية...
-        </p>
-
-        <p>
-          ما يُميز Axis عن برامج التحليل العاطفي أو المعنوي الأخرى أنه:
-        </p>
-        <ul>
-          <li>لا يسلب من الإنسان سلطته في الوعي.</li>
-          <li>يمارس فعلًا فلسفيًا حيًا: التأمل، الشك، الاستبصار وتدوين الاستنتاجات في المُفكرة.</li>
-          <li>يحوّل المواقف والمشاعر اليومية إلى مداخل تفكير عميق...</li>
-        </ul>
-
-        <p>
-          يحتوي البرنامج على مفكرة خاصة، يمكن للمستخدم من خلالها حفظ:
-        </p>
-        <ul>
-          <li>الإجابات التي كتبها بنفسه واستنتاجاته.</li>
-          <li>الاقتباسات أو الملاحظات التي أثرت فيه.</li>
-          <li>تأملاته الشخصية والمواقف العميقة التي مر بها كملاحظات قابلة للرجوع.</li>
-        </ul>
-
-        <h2>لماذا تم اختيار اسم Axis؟</h2>
-        <p>
-          لأن المحور لا ينتمي لأي طرف، بل يسمح بالدوران حوله. Axis هو رمز للمكان الهادئ بين الفوضى واليقين، بين الضجيج الداخلي وصوت الراصد الصامت. هو ليس إجابة، بل زاوية رؤية جديدة.
-        </p>
-
-        <!-- صورة محمود درويش -->
-        <div class="darwish-container">
-          <img src="assets/mahmood_photo.png" alt="محمود درويش" class="mahmood-photo">
+        <!-- فقاعة مقترح -->
+        <div class="bubble-row" aria-live="polite">
+          <div class="bubble bubble--reply">Suggest</div>
         </div>
 
-        <!-- فقرة محمود درويش -->
-        <h2>انطلاقاً من أبيات محمود درويش في قصيدتهِ (مديح الظّل العالي)</h2>
-        <blockquote>
-          كُلُّ أسئلة الوجود أمام ظلك مهزلة… والكونُ دفترك الصغير، وأنت خالقهُ
-        </blockquote>
-        <p>
-          البيت يشير إلى أن كل الأسئلة الفلسفية عن الوجود تصبح تافهة أمام حقيقة الذات...
-        </p>
-      </div>
-    </article>
+        <!-- صندوق "بماذا تُفكّر؟" مع زر السهم -->
+        <div class="think-row">
+          <button class="fab-toggle" aria-label="عرض/إخفاء">
+            <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+          </button>
+          <div class="think-box" role="textbox" aria-label="بماذا تُفكّر؟">بِماذا تُفكّر؟</div>
+        </div>
+      </section>
 
-  </section>
+      <!-- شاشة: الفكرة -->
+      <section id="idea" class="screen" aria-labelledby="idea-title" hidden>
+        <h1 id="idea-title" class="sr-only">الفكرة</h1>
+        <div class="container">
+          <p>هنا محتوى صفحة الفكرة…</p>
+        </div>
+      </section>
 
-  <script src="script.js"></script>
+      <!-- شاشة: عن AXIS -->
+      <section id="about" class="screen" aria-labelledby="about-title" hidden>
+        <h1 id="about-title" class="sr-only">عن AXIS</h1>
+        <div class="container">
+          <p>هنا تعريف موجز عن AXIS…</p>
+        </div>
+      </section>
+
+      <!-- شاشة: تواصل معنا -->
+      <section id="contact" class="screen" aria-labelledby="contact-title" hidden>
+        <h1 id="contact-title" class="sr-only">تواصل معنا</h1>
+        <div class="container">
+          <p>هنا وسائل التواصل والنموذج…</p>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ملف السكربت -->
+  <script defer src="script.js"></script>
 </body>
 </html>
