@@ -5,57 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AXIS | الرئيسية</title>
 
-  <!-- خطوط + أيقونات -->
+  <!-- خط + أيقونات -->
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-  <!-- ملف التنسيقات -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <div class="app">
 
-    <!-- شريط التنقّل -->
+    <!-- شريط التنقّل (نصوص فقط) -->
     <nav class="top-nav" aria-label="التنقّل الرئيسي">
-      <button class="nav-btn is-active" data-target="home" aria-current="page"><i class="fa-solid fa-house"></i></button>
-      <button class="nav-btn" data-target="idea"><i class="fa-solid fa-lightbulb"></i></button>
-      <button class="nav-btn" data-target="about"><i class="fa-solid fa-users"></i></button>
-      <button class="nav-btn" data-target="contact"><i class="fa-solid fa-envelope"></i></button>
+      <button class="nav-btn is-active" data-target="home" aria-current="page">الرئيسية</button>
+      <button class="nav-btn" data-target="idea">الفكرة</button>
+      <button class="nav-btn" data-target="about">عن AXIS</button>
+      <button class="nav-btn" data-target="contact">تواصل معنا</button>
     </nav>
 
-    <!-- منطقة الشاشات -->
-    <main class="screens" id="screens">
+    <!-- منطقة الشاشات: ارتفاع ثابت مع سكرول -->
+    <main class="screens" id="screens" tabindex="-1">
 
-      <!-- شاشة: الرئيسية -->
-      <section id="home" class="screen is-visible">
-        <!-- اقتراحات -->
-        <div class="suggest-row">
-          <div class="suggest">فكرة</div>
-          <div class="suggest">مشروع</div>
-          <div class="suggest">خطة</div>
-          <div class="suggest">تجربة</div>
-          <div class="suggest">ملاحظة</div>
+      <!-- الرئيسية -->
+      <section id="home" class="screen is-visible" aria-labelledby="home-title">
+        <h1 id="home-title" class="sr-only">الرئيسية</h1>
+
+        <!-- تغذية الفقاعات (الردود) -->
+        <div id="bubbleFeed" class="bubble-feed">
+          <!-- فقاعة أولية مثل الصورة -->
+          <div class="bubble-row">
+            <div class="bubble">Suggest</div>
+          </div>
         </div>
 
-        <!-- خانة البحث + زر إرسال -->
-        <div class="think-row">
-          <input type="text" id="thinkInput" class="think-input" placeholder="بماذا تُفكّر؟" />
-          <button id="sendBtn" class="send-btn" hidden><i class="fa-solid fa-paper-plane"></i></button>
+        <!-- اقتراحات (5) -->
+        <div class="suggest-row">
+          <button class="suggest">فكرة</button>
+          <button class="suggest">مشروع</button>
+          <button class="suggest">خطة</button>
+          <button class="suggest">تجربة</button>
+          <button class="suggest">ملاحظة</button>
+        </div>
+
+        <!-- مربع الكتابة + زر التثبيت -->
+        <div class="think-wrap" id="thinkWrap">
+          <button id="confirmBtn" class="confirm-btn" title="تثبيت" hidden>
+            <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+          </button>
+
+          <input type="text" id="thinkInput" class="think-input" placeholder="بماذا تُفكّر؟" inputmode="text" />
         </div>
       </section>
 
-      <!-- شاشة: الفكرة -->
+      <!-- الفكرة -->
       <section id="idea" class="screen" hidden>
         <div class="container"><p>هنا محتوى صفحة الفكرة…</p></div>
       </section>
 
-      <!-- شاشة: عن AXIS -->
+      <!-- عن AXIS -->
       <section id="about" class="screen" hidden>
         <div class="container"><p>هنا تعريف موجز عن AXIS…</p></div>
       </section>
 
-      <!-- شاشة: تواصل معنا -->
+      <!-- تواصل معنا -->
       <section id="contact" class="screen" hidden>
         <div class="container"><p>هنا وسائل التواصل والنموذج…</p></div>
       </section>
@@ -64,7 +76,6 @@
 
   </div>
 
-  <!-- ملف السكربت -->
   <script src="script.js"></script>
 </body>
 </html>
