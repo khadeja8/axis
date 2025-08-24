@@ -1,172 +1,160 @@
-:root{
-  /* ألوان من الصورة */
-  --bg:#eeeeee;
-  --chip:#bfc3b3;       /* الأزرار/الصناديق الزيتية */
-  --chip-2:#c6cabb;     /* درجة أفتح */
-  --text:#111;
-  --muted:#666;
-
-  --shadow-soft:0 6px 18px rgba(0,0,0,.08);
-  --shadow-strong:0 10px 28px rgba(0,0,0,.16), 0 3px 8px rgba(0,0,0,.10);
-
-  --r-pill: 48px;
+thought-input:focus {
+  box-shadow: 0 0 0 3px rgba(30,30,28,.15), var(--shadow-inner);
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:"Tajawal", system-ui, -apple-system, sans-serif;
-}
-
-/* الحاوية العامة */
-.app{
-  max-width: 1120px;
-  margin: 20px auto;
-  padding: 0 18px;
-}
-
-/* =========================
-   شريط التنقل (نصوص فقط)
-   ========================= */
-.top-nav{
-  display:flex;
-  justify-content:center;
-  gap: clamp(12px, 3vw, 28px);
-  flex-wrap: wrap;
-  margin-bottom: clamp(20px, 4vh, 36px);
-}
-
-.nav-btn{
-  appearance:none;
-  border: none;
-  background: var(--chip);
-  color:#000;
-  font-weight:700;
-  font-size: clamp(18px, 2.2vw, 30px);
-  padding: 12px clamp(18px, 3vw, 36px);
-  border-radius: 60px;
-  box-shadow: var(--shadow-soft);
-  cursor:pointer;
-  transition: transform .16s ease, box-shadow .25s ease, background .25s ease;
-}
-
-.nav-btn:hover{ transform: translateY(-2px); box-shadow: var(--shadow-strong); }
-
-/* حالة مفعّلة = بدون إطار أسود، مع توهج/ظل خفيف */
-.nav-btn.is-active{
-  background: var(--chip-2);
-  box-shadow: 0 0 0 0 rgba(0,0,0,0), 0 0 24px rgba(0,0,0,.16);
-}
-
-/* =========================
-   منطقة الشاشات بسكرول ثابت
-   ========================= */
-/* نستخدم 100svh حتى يكون ثابت على iOS/Android وقت ظهور الكيبورد */
-.screens{
-  height: calc(100svh - 120px); /* نخصم تقريب ارتفاع النافبار */
-  min-height: 480px;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  padding-bottom: 28px;
-}
-
-.screen{display:none}
-.screen.is-visible{display:block}
-
-.container{padding:16px}
-
-/* =========================
-   الفقاعات (ردود)
-   ========================= */
-.bubble-feed{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap: 14px;
-  margin-top: clamp(12px, 2vh, 18px);
-  margin-bottom: clamp(12px, 3vh, 22px);
-}
-
-.bubble-row{display:flex;justify-content:center;width:100%}
-.bubble{
-  background:#fff;
-  color:#000;
-  font-size: clamp(18px, 2.1vw, 28px);
-  padding: 12px 26px;
-  border-radius: 999px;
-  box-shadow: var(--shadow-soft);
-  position:relative;
-}
-.bubble::after{
-  content:"";
-  position:absolute;
-  right:-14px; top:50%; transform:translateY(-50%);
-  border: 12px solid transparent;
-  border-left-color:#fff;
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,.08));
-}
-
-/* =========================
-   الاقتراحات (5)
-   ========================= */
-.suggest-row{
-  display:flex;
-  justify-content:center;
-  flex-wrap: wrap;
-  gap: 10px 12px;
-  margin-bottom: clamp(12px, 3vh, 20px);
-}
-.suggest{
-  background: var(--chip);
-  border: none;
-  color:#000;
-  padding: 10px 18px;
-  border-radius: 999px;
-  box-shadow: var(--shadow-soft);
-  cursor:pointer;
-  font-size: clamp(14px, 1.8vw, 18px);
-  transition: background .2s ease, box-shadow .2s ease, transform .12s ease;
-}
-.suggest:hover{ background: var(--chip-2); box-shadow: var(--shadow-strong); transform: translateY(-1px); }
-
-/* =========================
-   مربع الكتابة + زر التثبيت
-   ========================= */
-.think-wrap{
-  /* يتمركز عموديًا بالافتراضي */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap: 14px;
-  margin-top: clamp(24px, 16vh, 28vh); /* يحطّه بمنتصف الشاشة تقريبًا */
-}
-
-.think-input{
-  width: min(760px, 90%);
-  min-height: 78px;
-  padding: 0 26px;
-  border: none;
-  border-radius: 999px;
-  outline: none;
-  background: var(--chip);
-  color: rgba(0,0,0,.7);
-  font-size: clamp(18px, 2.1vw, 26px);
-  box-shadow: var(--shadow-soft);
-}
-
-/* زر التثبيت (نفس الدائرة في الصورة) */
-.confirm-btn{
-  width: 86px; height: 86px;
+/* زر الإرسال (يظهر لاحقاً عبر JS بإزالة hidden) */
+.send-btn {
+  border: 0;
+  inline-size: 46px;
+  block-size: 46px;
   border-radius: 50%;
-  border: none;
-  background: var(--chip);
-  display:grid; place-items:center;
-  font-size: 26px; color:#3a3a3a;
-  box-shadow: var(--shadow-soft);
-  cursor:pointer;
-  transition: transform .12s ease, box-shadow .2s ease, background .2s ease;
+  background: var(--olive);
+  box-shadow: var(--shadow-soft), var(--shadow-inner);
+  display: inline-grid;
+  place-items: center;
+  transition: transform .15s ease, box-shadow .2s ease, background-color .2s ease;
 }
-.
+.send-btn svg path { fill: var(--text); }
+.send-btn:is(:hover, :focus-visible) {
+  transform: translateY(-1px);
+  background: var(--olive-strong);
+}
+.send-btn:active { transform: translateY(0); }
+
+/* تلميح بسيط تحت الحقل */
+.hint {
+  color: var(--muted);
+  margin: 8px 4px 0;
+  font-size: .95rem;
+}
+
+/* -------- Results -------- */
+.results {
+  margin-top: 26px;
+  display: grid;
+  gap: 16px;
+}
+
+.result-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-soft);
+}
+
+.result-title {
+  margin-bottom: .25rem;
+}
+
+.result-quote {
+  margin: .25rem 0 1rem;
+  padding: .75rem 1rem;
+  background: #fff;
+  border-radius: 12px;
+  border-inline-start: 4px solid var(--olive-strong);
+}
+
+.result-explainer { color: var(--text); }
+
+.result-question h3 {
+  margin: .5rem 0 .25rem;
+  font-weight: 600;
+}
+.save-to-notebook {
+  margin-top: .6rem;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 9999px;
+  background: var(--olive);
+  color: var(--text);
+  box-shadow: var(--shadow-inner);
+  cursor: pointer;
+}
+
+/* -------- Notebook Grid -------- */
+.notebook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.note-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow-soft);
+}
+.note-card header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 6px; margin-bottom: 8px;
+}
+.note-summary { color: var(--muted); }
+.note-open {
+  display: inline-block; margin-top: 8px;
+  text-decoration: none; color: var(--text);
+  background: var(--olive); padding: 8px 12px; border-radius: 9999px;
+}
+
+/* -------- About / Contact -------- */
+.about-content {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-soft);
+}
+
+.owner {
+  display: inline-grid;
+  gap: 10px;
+  align-items: center;
+  grid-template-columns: 72px 1fr;
+}
+.owner img {
+  inline-size: 72px; block-size: 72px; object-fit: cover;
+  border-radius: 50%;
+  box-shadow: var(--shadow-soft);
+  border: 2px solid #fff;
+}
+.owner figcaption { font-weight: 600; }
+
+.contact-list {
+  list-style: none; padding: 0; margin: 14px 0 0;
+  display: grid; gap: 6px;
+}
+.contact-list a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-inner);
+}
+.contact-list a:hover { box-shadow: var(--shadow-soft); }
+
+/* -------- Footer -------- */
+footer {
+  max-width: 1100px;
+  margin: 46px auto 28px;
+  padding: 0 18px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* -------- Accessibility & Prefs -------- */
+:focus-visible {
+  outline: 2px solid rgba(30,30,28,.28);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* -------- Utilities -------- */
+[hidden] { display: none !important; }
