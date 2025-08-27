@@ -1,8 +1,4 @@
-const intro = document.getElementById('intro');
-
-// بعد انتهاء أنيميشن الاختفاء → احذف الانترو من الـ DOM
-intro.addEventListener('animationend', e => {
-  if(e.animationName === "introExit"){
-    intro.remove();
-  }
-});
+// يخلي الانترو يختفي بعد 4 ثواني
+setTimeout(() => {
+  document.getElementById('intro').classList.add('hide');
+}, 4000);
