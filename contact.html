@@ -1,1 +1,86 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Axis — تواصل</title>
 
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200..700" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="contact">
+  <!-- نافبار موحّد -->
+  <header class="topbar" role="banner">
+    <div class="brand">
+      <span class="material-symbols-outlined logo-ico" aria-hidden="true">egg_alt</span>
+      <span class="brand-name">Axis</span>
+    </div>
+    <nav class="main-nav" aria-label="التنقّل الرئيسي">
+      <a class="nav-btn" href="index.html" data-match="home">
+        <span class="material-symbols-outlined">home</span><span>الرئيسية</span>
+      </a>
+      <a class="nav-btn" href="memory.html" data-match="memory">
+        <span class="material-symbols-outlined">edit_note</span><span>المفكرة</span>
+      </a>
+      <a class="nav-btn" href="About.html" data-match="about">
+        <span class="material-symbols-outlined">info</span><span>عن Axis</span>
+      </a>
+      <a class="nav-btn" href="Contact.html" data-match="contact">
+        <span class="material-symbols-outlined">call</span><span>تواصل</span>
+      </a>
+    </nav>
+    <div class="top-actions">
+      <button id="toggleTheme" class="icon-btn" title="الوضع الداكن/الفاتح">
+        <span class="material-symbols-outlined">dark_mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contact" class="page-wrap" role="main">
+    <!-- هيرو بسيط بدون صناديق -->
+    <section class="contact-hero" aria-labelledby="contact-title">
+      <!-- دائرة الصورة + حلقات متحركة -->
+      <div class="avatar-wrap" aria-hidden="true">
+ 
+        <img class="avatar-circle" src="khadeja.JPG" alt=" khadeja photo" />
+      </div>
+
+      <!--  الاسم  + النص -->
+      <div class="contact-copy">
+
+        <div class="founder-name">خديجة جواد | مطورة افكار وطالبة في هندسة الذكاء الاصطناعي</div>
+        <h1 id="contact-title" class="founder-title">
+          مؤسِّسة فكرة <span class="axis-badge">Axis</span>
+        </h1>
+        <p class="lead">
+       في زمن تتسارع فيه الحلول للمشكلات المادية، ويزداد فيه انشغال الإنسان بعالمه الخارجي المؤقت ونسيان عالمه الداخلي الأبدي، اقدم لكُم محور التفكير الذي يُعيد للإنسان وعيه المعرفي، ويذكرهُ بعمقه الروحي وحرية التفكير التي مُنحت له
+أؤمن أن التقنية والفكر حين يلتقيان يمكن أن يصبحا جسراً لا يُبعدنا عن ذواتنا، بل يعيدنا إليها ,
+
+أتمنى لكم تجربة عميقة مع axis تُعيدكم الى حقيقتكم وفهم ذواتكم ..
+        </p>
+
+        <!-- حسابات -->
+        <ul class="social-list" aria-label="حساباتي وروابطي">
+          <!-- استبدلي الروابط أدناه -->
+          <li><a class="social-btn" href="#" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined">language</span> موقعي
+          </a></li>
+          <li><a class="social-btn" href="#" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined">alternate_email</span> البريد
+          </a></li>
+          <li><a class="social-btn" href="#" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined">share</span> إنستغرام
+          </a></li>
+          <li><a class="social-btn" href="#" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined">groups</span> لينكدإن
+          </a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
