@@ -337,3 +337,42 @@ button.primary{
   .main-nav{ overflow:auto; }
   .inline-figure img{ border-radius:12px; }
 }
+/* المحتوى الأمامي (الهيرو + الشيبّات + النتائج) يكون فوق */
+.home-hero, .chip-row, .search-bar, .results{
+  position: relative;
+  z-index: 2;
+}
+
+/* الصورة كخلفية ثابتة بأسفل يمين الشاشة */
+.axis-bottom-art{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 0;            /* خلف كلشي */
+  pointer-events: none;  /* ما تتداخل ويّا الضغط */
+}
+
+.axis-bottom-art__img{
+  display: block;
+  height: var(--art-h-mobile); /* القيمة الافتراضية (موبايل) */
+  width: auto;
+  object-fit: contain;
+}
+
+/* تخصيص الحجم حسب الجهاز — غيّر القيم مثل ما تحب */
+:root{
+  --art-h-mobile: 250px;   /* موبايل */
+  --art-h-tablet: 300px;   /* تابلت */
+  --art-h-desktop: 400px;  /* لابتوب/ديسكتوب */
+}
+
+@media (min-width: 600px){   /* تابلت */
+  .axis-bottom-art__img{ height: var(--art-h-tablet); }
+}
+
+@media (min-width: 1024px){  /* ديسكتوب */
+  .axis-bottom-art__img{ height: var(--art-h-desktop); }
+}
+
+/* منع اي سكرول أفقي بسبب الصورة */
+html, body{ overflow-x: hidden; }
