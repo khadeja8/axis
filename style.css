@@ -362,7 +362,7 @@ button.primary{
 /* تخصيص الحجم حسب الجهاز — غيّر القيم مثل ما تحب */
 :root{
   --art-h-mobile: 350px;   /* موبايل */
-  --art-h-tablet: 400px;   /* تابلت */
+  --art-h-tablet: 450px;   /* تابلت */
   --art-h-desktop: 400px;  /* لابتوب/ديسكتوب */
 }
 
