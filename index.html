@@ -15,9 +15,8 @@
 <body data-page="home">
   <!-- الهيدر/النافبار (مكرر بكل الصفحات) -->
   <header class="topbar" role="banner">
-    <div class="brand"> 
-      <span class="material-symbols-outlined logo-ico" aria-hidden="true">egg_alt</span>
-      <span class="brand-name">Axis</span>
+    <div class="brand">
+
     </div>
 
     <nav class="main-nav" aria-label="التنقّل الرئيسي">
@@ -46,29 +45,34 @@
     </div>
   </header>
 
-  <main id="home" class="page-wrap" role="main">
-    <!-- عنوان بسيط -->
-    <header class="view-head">
-      <h1 class="view-title">
-        <span class="material-symbols-outlined" aria-hidden="true">travel_explore</span>
-        Axis — بحث بالمشاعر
-      </h1>
-    </header>
-
-    <!-- شِبّات الاقتراح (٥ فوق مربع البحث) -->
+<main id="home" class="page-wrap" role="main">
+  <!-- حاوية جديدة للسنترة -->
+  <section class="home-hero">
+    <!-- الشيبّات -->
     <div id="chipRow" class="chip-row" aria-label="اقتراحات سريعة"></div>
 
-    <!-- حقل البحث + زر الإرسال (يظهر عند الكتابة فقط) -->
+    <!-- مربع البحث -->
     <div class="search-bar" role="search">
-      <input id="emotionInput" type="text" inputmode="text" placeholder="اكتبي شعورك… مثلاً: توتر، فرح، ضياع…" aria-label="ابحثي بحسب الشعور" />
-      <button id="sendQuery" class="send-btn" aria-label="أرسلي" title="أرسلي">
+      <input
+        id="emotionInput"
+        type="text"
+        inputmode="text"
+        placeholder="بماذا تفكر؟"
+        aria-label="ابحث بحسب الشعور"
+      />
+      <button id="sendQuery" class="send-btn" aria-label="أرسل" title="أرسل">
         <span class="material-symbols-outlined" aria-hidden="true">arrow_upward_alt</span>
       </button>
     </div>
+  </section>
+  <!-- ===== Axis bottom art ===== -->
+<section class="axis-bottom-art" aria-hidden="true">
+  <img class="axis-bottom-art__img" src="photo1.png" alt="Axis Art">
+</section>
 
-    <!-- نتائج -->
-    <div id="results" class="results" aria-live="polite"></div>
-  </main>
+  <!-- نتائج -->
+  <div id="results" class="results" aria-live="polite"></div>
+</main>
 
   <!-- Toast -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
