@@ -196,12 +196,3 @@ if(document.body.dataset.page === 'memory'){
   renderJournal();
 }
 
-// ===== الصفحة: تواصل (نرسل Toast شكلي) =====
-if(document.body.dataset.page === 'contact'){
-  const form = $('#contactForm');
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    toast('وصلتنا رسالتك (نموذج تجريبي). بنضيف إرسال فعلي لاحقًا ✉️');
-    form.reset();
-  });
-}
