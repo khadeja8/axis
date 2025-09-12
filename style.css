@@ -72,54 +72,84 @@ a{ color:inherit; text-decoration:none; }
 /* =========================================================
    Topbar / Navbar
    ========================================================= */
-.topbar{
-  position:sticky; top:0; z-index:50;
-  display:grid; grid-template-columns:1fr auto 1fr;
-  align-items:center; gap: var(--space-2);
-  padding:.75rem var(--space-3);
-  background: linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,0));
+.topbar {
+  position: sticky; 
+  top: 0; 
+  z-index: 50;
+  display: grid; 
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center; 
+  gap: var(--space-2);
+  padding: .75rem var(--space-3);
+  background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,0));
   backdrop-filter: blur(10px);
 }
-:root.light .topbar{
-  background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,0));
-}
-.brand{ display:flex; align-items:center; gap:.5rem; }
-.logo-ico{ font-size:28px; color:var(--brand); }
-.brand-name{ font-weight:800; letter-spacing:.3px; font-size:1.15rem; }
 
-.main-nav{
-  display:flex; gap:.5rem; justify-content:center; align-items:center;
-  background: rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  padding:.35rem; border-radius:999px;
+.brand { 
+  display: flex; 
+  align-items: center; 
+  gap: .5rem; 
 }
-:root.light .main-nav{
+.logo-ico { 
+  font-size: 28px; 
+  color: var(--brand); 
+}
+.brand-name { 
+  font-weight: 800; 
+  letter-spacing: .3px; 
+  font-size: 1.15rem; 
+}
+
+.main-nav {
+  display: flex; 
+  gap: .5rem; 
+  justify-content: center; 
+  align-items: center;
   background: rgba(0,0,0,.03);
-  border-color: rgba(0,0,0,.06);
+  border: 1px solid rgba(0,0,0,.06);
+  padding: .35rem; 
+  border-radius: 999px;
 }
-.nav-btn{
-  display:flex; align-items:center; gap:.45rem;
+
+.nav-btn {
+  display: flex; 
+  align-items: center; 
+  gap: .45rem;
   color: var(--muted);
-  padding:.55rem .9rem; border-radius:999px;
+  padding: .55rem .9rem; 
+  border-radius: 999px;
   transition: background var(--trans-fast), color var(--trans-fast), transform var(--trans-fast);
 }
-.nav-btn:is(:hover,:focus){ background: rgba(255,255,255,.07); color:var(--text); }
-:root.light .nav-btn:is(:hover,:focus){ background: rgba(0,0,0,.05); }
-.nav-btn.is-active{
-  background: var(--brand); color:var(--brand-contrast);
+.nav-btn:is(:hover,:focus){ 
+  background: rgba(0,0,0,.05); 
+  color: var(--text); 
 }
-.nav-btn .material-symbols-outlined{ font-size:20px; }
+.nav-btn.is-active {
+  background: var(--brand); 
+  color: var(--brand-contrast);
+}
+.nav-btn .material-symbols-outlined { 
+  font-size: 20px; 
+}
 
-.top-actions{ display:flex; justify-content:flex-end; gap:.5rem; }
-.icon-btn{
-  border:1px solid rgba(255,255,255,.12);
-  background: var(--surface); color:var(--text);
-  padding:.55rem; border-radius:12px; cursor:pointer;
+.top-actions { 
+  display: flex; 
+  justify-content: flex-end; 
+  gap: .5rem; 
+}
+.icon-btn {
+  border: 1px solid rgba(0,0,0,.08);
+  background: var(--surface); 
+  color: var(--text);
+  padding: .55rem; 
+  border-radius: 12px; 
+  cursor: pointer;
   transition: transform var(--trans-fast), background var(--trans-fast);
 }
-.icon-btn:hover{ transform: translateY(-2px); background: var(--surface-2); }
-:root.light .icon-btn{ border-color: rgba(0,0,0,.08); }
-
+.icon-btn:hover { 
+  transform: translateY(-2px); 
+  background: var(--surface-2); 
+}
 /* =========================================================
    Headers (page sections)
    ========================================================= */
@@ -199,38 +229,73 @@ body[data-page="home"]{ overflow-x:hidden; }
   user-select: none;
 }
 /* =========================================================
-   Journal (المفكرة)
+/* Journal (المفكرة)
    ========================================================= */
+
+/* الحالة الفارغة */
+.empty-state{
+  display:grid;
+  place-items:center;
+  text-align:center;
+  min-height: 55vh;
+  padding: var(--space-3);
+}
+.empty-text{
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+/* (جاهز للمستقبل) نموذج الإدخال والقائمة — ألوان وضع أبيض فقط */
 .journal-form{
-  background: var(--surface); border:1px solid rgba(255,255,255,.08);
-  border-radius: var(--radius); padding: var(--space-3); box-shadow: var(--shadow-1);
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  box-shadow: var(--shadow-1);
 }
 .field{ display:flex; flex-direction:column; gap:.5rem; }
 .field-label{ color: var(--muted); font-size:.95rem; }
+
 textarea, input[type="text"], input[type="email"]{
-  width:100%; background: var(--surface-2); color: var(--text);
-  border:1px solid rgba(255,255,255,.10); border-radius: 12px; padding:.9rem 1rem;
+  width:100%;
+  background: #f3f4f6;          /* سطح فاتح ثابت */
+  color: var(--text);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 12px;
+  padding:.9rem 1rem;
   resize: vertical; outline:none;
 }
-:root.light textarea, :root.light input[type="text"], :root.light input[type="email"]{
-  border-color: rgba(0,0,0,.06);
-  background:#f3f4f6;
+
+.form-row.end{
+  display:flex; justify-content:flex-end;
+  margin-top:.8rem; gap:.6rem;
 }
-.form-row.end{ display:flex; justify-content:flex-end; margin-top:.8rem; gap:.6rem; }
 button.primary{
-  background: var(--brand); color: var(--brand-contrast); border:0;
-  padding:.85rem 1.05rem; border-radius:12px; cursor:pointer; box-shadow: var(--shadow-1);
+  background: var(--brand);
+  color: var(--brand-contrast);
+  border:0; padding:.85rem 1.05rem;
+  border-radius:12px; cursor:pointer;
+  box-shadow: var(--shadow-1);
 }
 
-.journal-list{ list-style:none; padding:0; margin: var(--space-3) 0 0; display:grid; gap: var(--space-2); }
+/* قائمة المذكرات */
+.journal-list{
+  list-style:none; padding:0;
+  margin: var(--space-3) 0 0;
+  display:grid; gap: var(--space-2);
+}
 .journal-item{
-  background: var(--surface-2); border-radius: var(--radius); padding: var(--space-2); box-shadow: var(--shadow-1);
+  background: #f9fafb;          /* سطح ثانٍ فاتح ثابت */
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  box-shadow: var(--shadow-1);
 }
-.journal-meta{ display:flex; align-items:center; gap:.6rem; color: var(--muted); font-size:.9rem; }
+.journal-meta{
+  display:flex; align-items:center; gap:.6rem;
+  color: var(--muted); font-size:.9rem;
+}
 .journal-actions{ margin-top:.6rem; display:flex; gap:.4rem; }
-.icon-btn.danger{ border-color: rgba(239,68,68,.3); color:#ffb4b4; }
-
-
+.icon-btn.danger{ border-color: rgba(239,68,68,.3); color:#ff4d4d; }
 /* =========================================================
    About (مقال + صورة وسط)
    ========================================================= */
