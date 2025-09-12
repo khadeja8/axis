@@ -5,21 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Axis — المفكرة</title>
 
+  <!-- الخطوط -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200..700" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body data-page="memory">
+  <!-- شريط علوي -->
   <header class="topbar" role="banner">
     <div class="brand">
-      <span class="material-symbols-outlined logo-ico" aria-hidden="true">egg_alt</span>
-      <span class="brand-name">Axis</span>
     </div>
     <nav class="main-nav" aria-label="التنقّل الرئيسي">
       <a class="nav-btn" href="index.html" data-match="home">
         <span class="material-symbols-outlined">home</span><span>الرئيسية</span>
       </a>
-      <a class="nav-btn" href="memory.html" data-match="memory">
+      <a class="nav-btn is-active" href="memory.html" data-match="memory">
         <span class="material-symbols-outlined">edit_note</span><span>المفكرة</span>
       </a>
       <a class="nav-btn" href="about.html" data-match="about">
@@ -29,43 +29,13 @@
         <span class="material-symbols-outlined">call</span><span>تواصل</span>
       </a>
     </nav>
-    <div class="top-actions">
-      <button id="toggleTheme" class="icon-btn" title="الوضع الداكن/الفاتح">
-        <span class="material-symbols-outlined">dark_mode</span>
-      </button>
-    </div>
   </header>
 
+  <!-- المحتوى الرئيسي -->
   <main id="memory" class="page-wrap" role="main">
-    <header class="view-head">
-      <h1 class="view-title">
-        <span class="material-symbols-outlined" aria-hidden="true">edit_note</span>
-        مفكرتي
-      </h1>
-      <div class="view-actions">
-        <button id="exportJournal" class="icon-btn">
-          <span class="material-symbols-outlined" aria-hidden="true">download</span> تصدير
-        </button>
-        <button id="clearJournal" class="icon-btn danger">
-          <span class="material-symbols-outlined" aria-hidden="true">delete</span> حذف الكل
-        </button>
-      </div>
-    </header>
-
-    <form id="journalForm" class="journal-form" autocomplete="off">
-      <label class="field">
-        <span class="field-label">اكتبي مذكّرتك اليوم</span>
-        <textarea id="journalInput" rows="4" placeholder="مثلاً: اليوم حسّيت بالقلق قبل المحاضرة…"></textarea>
-      </label>
-      <div class="form-row end">
-        <button type="submit" class="primary">
-          <span class="material-symbols-outlined" aria-hidden="true">send</span>
-          أضِيفي للمفكرة
-        </button>
-      </div>
-    </form>
-
-    <ul id="journalList" class="journal-list" aria-live="polite" aria-label="قائمة المذكرات"></ul>
+    <section class="empty-state" aria-label="الحالة الفارغة">
+      <p class="empty-text">لا توجد مذكّرات بعد</p>
+    </section>
   </main>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
