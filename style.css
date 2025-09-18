@@ -620,7 +620,7 @@ body[data-page="home"]{ overflow-x:hidden; }
 /* المحتوى الأمامي (الهيرو + الشيبّات + النتائج) يكون فوق */
 .home-hero, .chip-row, .search-bar, .results{
   position: relative;
-  z-index: 2;
+  z-index: 5;
 }
 
 /* الصورة كخلفية ثابتة بأسفل يمين الشاشة */
