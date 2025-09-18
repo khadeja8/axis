@@ -657,3 +657,42 @@ body[data-page="home"]{ overflow-x:hidden; }
 /* منع اي سكرول أفقي بسبب الصورة */
 html, body{ overflow-x: hidden; }
 
+
+
+/* خلّي كل محتوى الصفحة أعلى من الخلفية */
+.page-wrap{
+  position: relative;
+  z-index: 2;   /* أعلى من الخلفية */
+}
+
+/* الخلفية تكون دائماً تحت (حتى على iPad/Safari) */
+.axis-bottom-art{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: -1;           /* تحت كل شيء فعلاً */
+  pointer-events: none;
+}
+
+/* حجم الصورة الافتراضي */
+:root{
+  --art-h-mobile: 350px;   /* موبايل */
+  --art-h-tablet: 360px;   /* خفّضناها للآيباد حتى لا تغطي */
+  --art-h-desktop: 400px;  /* لابتوب/ديسكتوب */
+}
+
+/* تابلت (يشمل iPad 768px) */
+@media (min-width: 600px) and (max-width: 1023.98px){
+  .axis-bottom-art__img{ height: var(--art-h-tablet); }
+}
+
+/* ديسكتوب */
+@media (min-width: 1024px){
+  .axis-bottom-art__img{ height: var(--art-h-desktop); }
+}
+
+/* تأكد كل العناصر الأمامية داخل الصفحة فوق الخلفية */
+.home-hero, .chip-row, .search-bar, .results{
+  position: relative;
+  z-index: 3; /* أعلى من الصفحة نفسها */
+}
