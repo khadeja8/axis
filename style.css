@@ -657,31 +657,50 @@ body[data-page="home"]{ overflow-x:hidden; }
 /* منع اي سكرول أفقي بسبب الصورة */
 html, body{ overflow-x: hidden; }
 
-/* تأكدي من ستاكينغ واضح */
-.hero{ position: relative; overflow: clip; }
-.hero-content{ position: relative; z-index: 2; }  /* النص فوق */
-.hero-art{
-  position: absolute; /* أو fixed حسب تصميمك الأصلي */
-  right: 0; bottom: 0;
+/* ===== قاعدة عامة: الصورة تبقى تحت والنص فوق ===== */
+.axis-bottom-art{
+  position: relative;
+  z-index: 0;          /* الحاوية تحت */
+  overflow: clip;      /* منع التسريب */
+}
+
+/* صورة الجبل كعنصر مستقل على كل الأجهزة (إلا iPad) */
+.axis-bottom-art__img{
+  position: absolute;  /* لا تستخدمي fixed هنا */
+  right: 0;
+  bottom: 0;
   width: min(48vw, 620px);
-  max-width: 100%;
   height: auto;
   z-index: 1;          /* تحت النص */
-  pointer-events: none;/* حتى ما ياخذ لمس */
+  pointer-events: none;
+  user-select: none;
 }
 
-/* أجهزة لوحية لمس (آيباد) */
-@media (hover:none) and (pointer:coarse) and (min-width:768px){
-  /* أبطال أي transform على الآباء لأنه يكسر الطبقات بسفاري iPad */
-  .hero, .topbar, .page-wrap{ transform: none !important; }
-  .hero-art{
-    position: absolute;       /* خليه absolute مو fixed على iPad */
-    opacity: .85;             /* اختياري لتخفيف التباين */
-    width: min(42vw, 560px);  /* قللي الحجم حتى ما يغطي النص */
-  }
+/* ارفعي طبقة الكارت/النص (لو متوفر عندك هذي الكلاسات) */
+.result-item,
+.results,
+.hero-content{
+  position: relative;
+  z-index: 2;          /* فوق الصورة دائمًا */
 }
 
-/* لو النص لاصق بالجبل على شاشات وسط */
+/* مساحة يمين إضافية على الشاشات الوسط حتى ما يلامس النص الصورة */
 @media (min-width:768px) and (max-width:1180px){
-  .hero{ padding-inline-end: clamp(16px, 6vw, 72px); }
+  .result-item{ padding-inline-end: clamp(16px, 6vw, 72px); }
+}
+
+/* ===== علاج Safari على iPad =====
+   - نلغي أي transform لأنه يكسَر ترتيب الطبقات.
+   - نخفي <img> ونحوّلها لخلفية للحاوية فقط على iPad. */
+@media (hover:none) and (pointer:coarse) and (min-width:768px){
+  .topbar, .page-wrap, .axis-bottom-art{ transform: none !important; will-change: auto; }
+
+  /* أخفي العنصر الصوري على iPad */
+  .axis-bottom-art__img{ display: none !important; }
+
+  /* نفس الصورة لكن كخلفية للحاوية (مستحيل تغطي النص) */
+  .axis-bottom-art{
+    background: url("photo1.png") no-repeat bottom right;
+    background-size: clamp(240px, 36vw, 520px);
+  }
 }
