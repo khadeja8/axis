@@ -164,12 +164,18 @@ body[data-page="home"]{ overflow-x:hidden; }
 /* أخفِ العنوان لو وُجد */
 .view-head{ display:none !important; }
 
+/* سنترة البطل (الشيبّات + البحث) */
+.home-hero{
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+  gap:.6rem; margin-top:1rem;
+}
+
+/* ===== Chips ===== */
 .chip-row{
   display:flex; flex-wrap:wrap; gap:.6rem;
   margin:.8rem 0 .6rem;
   justify-content:center;
 }
-
 .chip{
   display:inline-flex; align-items:center; gap:.4rem;
   padding:.48rem .9rem; border-radius:999px;
@@ -179,11 +185,18 @@ body[data-page="home"]{ overflow-x:hidden; }
   transition: background var(--trans-fast), transform var(--trans-fast);
 }
 .chip:hover{ background: rgba(255,255,255,.08); transform:translateY(-2px); }
-:root.light .chip{ border-color: rgba(0,0,0,.06); background: #f3f4f6; }
+:root.light .chip{ border-color: rgba(0,0,0,.06); background:#f3f4f6; }
 :root.light .chip:hover{ background:#e7e9ee; }
 .chip .ms{ font-size:18px; opacity:.9; color:var(--brand); }
 
-/* مربع البحث بيضوي ومتنزل شوية */
+/* حالة عدم وجود اقتراحات */
+.chip-empty{
+  padding:.55rem .9rem; border-radius:999px;
+  background:#f3f4f6; color:#6b7280; border:1px dashed rgba(0,0,0,.12);
+  font-size:.92rem;
+}
+
+/* ===== Search ===== */
 .search-bar{
   display:flex; align-items:center; gap:.5rem;
   background: var(--surface);
@@ -194,108 +207,310 @@ body[data-page="home"]{ overflow-x:hidden; }
   margin:2.5rem auto 0;              /* نزّل المربع للأسفل */
 }
 :root.light .search-bar{ border-color: rgba(0,0,0,.06); }
-
 .search-bar input{
   flex:1; background:transparent; color:var(--text);
   border:0; outline:none; padding:.8rem 1rem; font-size:1rem;
-  border-radius:999px;              /* بيضوي */
+  border-radius:999px;
 }
-
 .search-icon, .send-btn{
   display:grid; place-items:center; border:0; cursor:pointer;
-  width:40px; height:40px; border-radius:50%; /* حتى الأيقونة نفسها دائرية */
+  width:40px; height:40px; border-radius:50%;
 }
 .search-icon{ background: var(--surface-2); color:var(--text); }
 .send-btn{ background: var(--brand); color: var(--brand-contrast); box-shadow: var(--shadow-1); display:none; }
 .send-btn.show{ display:grid; }
 
-.results{ margin-top: var(--space-2); display:grid; gap:.9rem; }
-.result-item{
-  background: var(--surface-2); border-radius:12px; padding: .9rem 1rem; box-shadow: var(--shadow-1);
+/* ===== Results ===== */
+.results{
+  margin: var(--space-2) auto 0;
+  display:grid; gap:.9rem;
+  width:min(760px, 92vw);
 }
-.result-item h4{ margin:.1rem 0 .25rem; font-size:1.05rem; }
-.result-item p{ margin:0; color: var(--muted); }
+.result-item{
+  background: var(--surface-2);
+  border-radius:12px; padding:.95rem 1rem;
+  box-shadow: var(--shadow-1);
+  border:1px solid rgba(255,255,255,.10);
+}
+:root.light .result-item{ border-color: rgba(0,0,0,.06); }
+.result-item h4{ margin:.1rem 0 .35rem; font-size:1.12rem; font-weight:800; }
+.result-item p{ margin:0; color: var(--muted); line-height:1.8; }
 
- /*صورة الجبل  */
-.axis-bottom-art__img {
-  position: absolute;
-  bottom: -90px;    /* نزل الصورة 40 بكسل لتحت */
-  right: 0;
-  height: clamp(400px, 70vh, 950px);
-  width: auto;
-  display: block;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
+/* تفاصيل داخل البطاقة */
+.r-details{ margin-top:.55rem; }
+.r-details > summary{
+  cursor:pointer; outline:none; user-select:none;
+  color:var(--text); font-weight:700; margin-bottom:.3rem;
+}
+.r-block{ margin-top:.55rem; }
+.r-block h5{ margin:.15rem 0 .25rem; font-size:.98rem; }
+
+/* زر حفظ السؤال داخل النتيجة — مطابق لهوية الموقع */
+.r-actions{
+  margin-top:.9rem;
+  display:flex; justify-content:flex-start;
+}
+
+/* أساس الزر */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.4rem;
+  padding:.55rem 1.1rem;
+  border-radius:10px;
+  font-family: 'Cairo', sans-serif;   /* نفس خط الموقع */
+  font-weight:400;                     /* نفس وزن العناوين بالأعلى */
+  font-size:.95rem;
+  cursor:pointer;
+  border:1px solid transparent;
+  transition: transform .15s ease, box-shadow .2s ease, filter .15s ease;
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* نسخة Primary تستخدم لون البراند للموقع فقط */
+.btn.primary{
+  background: var(--brand) !important;
+  color: var(--brand-contrast) !important;
+  border-color: var(--brand);
+  box-shadow: 0 3px 8px rgba(0,0,0,.12);
+}
+
+/* Hover/Active بدون ألوان ثابتة — نعتم اللون الحالي */
+.btn.primary:hover{ transform: translateY(-2px); filter: brightness(.95); box-shadow: 0 8px 18px rgba(0,0,0,.18); }
+.btn.primary:active{ transform: translateY(0);    filter: brightness(.90); }
+
+/* تركيز واضح بلون البراند */
+.btn:focus-visible{
+  outline:2px solid var(--brand);
+  outline-offset:2px;
+}
+
+/* زر عادي (لو احتجتيه) بألوان هوية الموقع */
+:root.light .btn{
+  background:#fff;
+  color:var(--text);
+  border-color: rgba(0,0,0,.10);
+}
+/* وسطي زر حفظ السؤال داخل البطاقة */
+.r-actions{
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;   /* يخلي الزر بالوسط */
+}
+
+/* لا نتائج */
+.no-results{
+  text-align:center; padding:1rem;
+  border-radius:12px; background:#f8f9fb;
+  border:1px dashed #c9ced6; color:#4b5563;
+  width:min(560px, 92vw); margin:1rem auto 0;
+}
+
+/* ===== Toast ===== */
+.toast{
+  position:fixed; inset-inline-start:50%; transform:translateX(-50%);
+  bottom:18px; background:#111; color:#fff; padding:.6rem .9rem;
+  border-radius:10px; opacity:0; pointer-events:none; transition:.25s ease;
+  font-size:.92rem; z-index:50;
+}
+.toast.show{ opacity:1; transform:translateX(-50%) translateY(-4px); }
+
+/* ===== Bottom Art ===== */
+.axis-bottom-art{ position:relative; }
+.axis-bottom-art__img{
+  position:absolute;
+  bottom:-90px; right:0;
+  height:clamp(400px, 70vh, 950px); width:auto;
+  display:block; object-fit:contain;
+  pointer-events:none; user-select:none;
+}
+
+/* صيانة بسيطة للمسافات */
+:root{
+  --space-2: 1.2rem;
 }
 /* =========================================================
 /* Journal (المفكرة)
    ========================================================= */
 
-/* الحالة الفارغة */
+/* حاويات العرض */
+#memList, #memDetail{
+  width: min(1100px, 92vw);
+  margin: 1.2rem auto 2rem;
+}
+
+/* ===== الحالة الفارغة ===== */
+#emptyMem[hidden]{ display:none !important; }
 .empty-state{
-  display:grid;
-  place-items:center;
   text-align:center;
-  min-height: 55vh;
-  padding: var(--space-3);
-}
-.empty-text{
   color: var(--muted);
-  font-size: 1.1rem;
+  padding: 2rem 1rem;
 }
 
-/* (جاهز للمستقبل) نموذج الإدخال والقائمة — ألوان وضع أبيض فقط */
-.journal-form{
-  background: #fff;
-  border: 1px solid rgba(0,0,0,.06);
-  border-radius: var(--radius);
-  padding: var(--space-3);
-  box-shadow: var(--shadow-1);
+/* ===== شبكة الفولدرات (تصطف من أعلى اليمين) ===== */
+.folder-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 1rem 1rem;
+  justify-content:flex-end;   /* ابدأ من يمين السطر */
+  align-items:flex-start;
 }
-.field{ display:flex; flex-direction:column; gap:.5rem; }
-.field-label{ color: var(--muted); font-size:.95rem; }
 
-textarea, input[type="text"], input[type="email"]{
-  width:100%;
-  background: #f3f4f6;          /* سطح فاتح ثابت */
+/* بطاقة الفولدر (بدون خلفية) */
+.folder-card{
+  width:160px;
+  background:transparent;
+  border:0; padding:.4rem;
+  cursor:pointer; text-align:center;
+  border-radius:12px;
+  transition: transform .18s ease;
+}
+.folder-card:focus-visible{
+  outline:2px solid var(--brand);
+  outline-offset:3px;
+}
+
+/* أيقونة الفولدر */
+.folder-icon{
+  width:88px; height:auto; display:block; margin:0 auto;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.18));
+  transition: transform .18s ease, filter .18s ease;
+}
+.folder-card:hover .folder-icon{
+  transform: translateY(-3px) scale(1.03);
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,.22));
+}
+
+/* اسم الشعور تحت الفولدر */
+.folder-name{
+  margin-top:.35rem;
+  font-family: 'Cairo', sans-serif;   /* نفس خط الموقع */
+  font-weight:500;                    /* نفس وزن خط النافبار */
+  font-size:.9rem;                    /* حجم مقارب للي فوق */
+  line-height:1.6;
   color: var(--text);
-  border: 1px solid rgba(0,0,0,.06);
-  border-radius: 12px;
+}
+
+/* ===== تفاصيل المفكرة ===== */
+#memDetail[hidden]{ display:none !important; }
+#memDetail{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:16px;
+  padding:1rem;
+}
+#memDetail h2{
+  margin:.3rem 0 .5rem;
+  font-size:1.18rem; font-weight:800; color:var(--text);
+}
+.detail-question{
+  background:#f8fafc;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:12px;
   padding:.9rem 1rem;
-  resize: vertical; outline:none;
+  line-height:1.9; color:var(--text);
 }
 
-.form-row.end{
-  display:flex; justify-content:flex-end;
-  margin-top:.8rem; gap:.6rem;
+/* موبايل */
+@media (max-width:520px){
+  .folder-card{ width:130px; }
+  .folder-icon{ width:74px; }
 }
-button.primary{
+/* ===== أدوات التحرير (قلم / نص) ===== */
+#editorControls{
+  display:flex; gap:.6rem; align-items:center;
+  margin: 1rem 0 .8rem;
+}
+#editorControls .btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:42px; height:42px; border-radius:10px;
+  border:1px solid rgba(0,0,0,.10);
+  background:#fff; color:var(--text);
+  transition: transform .15s ease, box-shadow .2s ease, filter .15s ease;
+  cursor:pointer;
+}
+#editorControls .btn:hover{ transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,.12); }
+#editorControls .btn.active{
   background: var(--brand);
+  border-color: var(--brand);
   color: var(--brand-contrast);
-  border:0; padding:.85rem 1.05rem;
-  border-radius:12px; cursor:pointer;
-  box-shadow: var(--shadow-1);
 }
 
-/* قائمة المذكرات */
-.journal-list{
-  list-style:none; padding:0;
-  margin: var(--space-3) 0 0;
-  display:grid; gap: var(--space-2);
+/* ===== محرر النص ===== */
+#textEditor{ display:block; }
+#textEditor[hidden]{ display:none !important; }
+#noteText{
+  width:100%;
+  min-height: 180px;
+  background:#f8fafc;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:12px;
+  padding: .9rem 1rem;
+  line-height:1.9; color:var(--text);
+  outline:none; resize: vertical;
+  font-family: 'Cairo', sans-serif;
 }
-.journal-item{
-  background: #f9fafb;          /* سطح ثانٍ فاتح ثابت */
-  border-radius: var(--radius);
-  padding: var(--space-2);
-  box-shadow: var(--shadow-1);
+
+/* ===== محرر الرسم ===== */
+#drawEditor{ display:block; }
+#drawEditor[hidden]{ display:none !important; }
+
+/* غلاف للكانفاس حتى يكون مقاسه مرن */
+#drawCanvas{
+  display:block;
+  width:100%;           /* يمتلئ عرض الحاوية */
+  max-width: 900px;     /* حد أقصى مريح */
+  height: 360px;        /* ارتفاع مبدئي واضح */
+  background:#ffffff;   /* خلفية بيضاء للرسم */
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.06);
 }
-.journal-meta{
-  display:flex; align-items:center; gap:.6rem;
-  color: var(--muted); font-size:.9rem;
+
+/* أزرار أسفل الرسم/النص */
+#textEditor > div,
+#drawEditor > div{
+  display:flex; gap:.6rem; align-items:center;
+  margin-top:.7rem;
 }
-.journal-actions{ margin-top:.6rem; display:flex; gap:.4rem; }
-.icon-btn.danger{ border-color: rgba(239,68,68,.3); color:#ff4d4d; }
+
+/* ===== المداخلات المحفوظة ===== */
+#entries{
+  margin-top: 1.2rem;
+  display:grid; gap:.8rem;
+}
+#entries .entry{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:12px;
+  padding:.8rem .9rem;
+}
+#entries .entry .meta{
+  display:flex; align-items:center; justify-content:space-between;
+  color: var(--muted); font-size:.9rem; margin-bottom:.5rem;
+}
+#entries .entry .btn{
+  padding:.35rem .7rem; border-radius:.5rem;
+  border:1px solid rgba(0,0,0,.08);
+  background:#fff; color:var(--text); cursor:pointer;
+}
+#entries .entry img{ border-radius:8px; }
+
+/* حالة إخفاء النص الفارغ */
+.small-muted{
+  color: var(--muted);
+  font-size:.95rem;
+  text-align:center;
+  padding:.6rem;
+}
+
+/* تحسين محاذاة الفولدرات على RTL تمامًا */
+.folder-grid{ direction: rtl; }
+
+/* (اختياري) توحيد خط اسم الفولدر مع خط الموقع ووزن أوضح */
+.folder-name{
+  font-family: 'Cairo', sans-serif;
+  font-weight:600; /* اذا تريدينه 500 رجّعيها */
+}
 /* =========================================================
    About (مقال + صورة وسط)
    ========================================================= */
