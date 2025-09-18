@@ -637,6 +637,8 @@ body[data-page="home"]{ overflow-x:hidden; }
   height: var(--art-h-mobile); /* القيمة الافتراضية (موبايل) */
   width: auto;
   object-fit: contain;
+   z-index: 0;            /* خلف كلشي */
+  pointer-events: none;  /* ما تتداخل ويّا الضغط */
 }
 
 /* تخصيص الحجم حسب الجهاز — غيّر القيم مثل ما تحب */
