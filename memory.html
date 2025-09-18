@@ -5,36 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Axis — المفكرة</title>
 
-  <!-- الخطوط -->
+  <!-- خطوط -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200..700" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body data-page="memory">
-  <!-- شريط علوي -->
+  <!-- الشريط العلوي -->
   <header class="topbar" role="banner">
-    <div class="brand">
-    </div>
+    <div class="brand"></div>
     <nav class="main-nav" aria-label="التنقّل الرئيسي">
-      <a class="nav-btn" href="index.html" data-match="home">
-        <span class="material-symbols-outlined">home</span><span>الرئيسية</span>
-      </a>
-      <a class="nav-btn is-active" href="memory.html" data-match="memory">
-        <span class="material-symbols-outlined">edit_note</span><span>المفكرة</span>
-      </a>
-      <a class="nav-btn" href="about.html" data-match="about">
-        <span class="material-symbols-outlined">info</span><span>عن Axis</span>
-      </a>
-      <a class="nav-btn" href="contact.html" data-match="contact">
-        <span class="material-symbols-outlined">call</span><span>تواصل</span>
-      </a>
+      <a class="nav-btn" href="index.html" data-match="home"><span class="material-symbols-outlined">home</span><span>الرئيسية</span></a>
+      <a class="nav-btn is-active" href="memory.html" data-match="memory"><span class="material-symbols-outlined">edit_note</span><span>المفكرة</span></a>
+      <a class="nav-btn" href="about.html" data-match="about"><span class="material-symbols-outlined">info</span><span>عن Axis</span></a>
+      <a class="nav-btn" href="contact.html" data-match="contact"><span class="material-symbols-outlined">call</span><span>تواصل</span></a>
     </nav>
   </header>
 
-  <!-- المحتوى الرئيسي -->
+  <!-- المحتوى -->
   <main id="memory" class="page-wrap" role="main">
-    <section class="empty-state" aria-label="الحالة الفارغة">
-      <p class="empty-text">لا توجد مذكّرات بعد</p>
+    <!-- شبكة الفولدرات -->
+    <section id="memList" aria-label="شبكة المفكرات">
+      <div id="emptyMem" class="empty-state">لم تقم بحفظ أي أسئلة بعد.</div>
+      <div id="folderGrid" class="folder-grid"></div>
+    </section>
+
+    <!-- التفاصيل + المحرر -->
+    <section id="memDetail" aria-label="تفاصيل المفكرة" hidden>
+      <button id="backToGrid" class="btn">رجوع</button>
+      <h2 id="detailEmotion"></h2>
+      <div id="detailQuestion" class="detail-question"></div>
+
+      <!-- أدوات التحرير (أيقونات احترافية) -->
+      <div id="editorControls">
+        <button id="modeDraw" class="btn" title="وضع القلم" aria-label="وضع القلم">
+          <span class="material-symbols-outlined" aria-hidden="true">draw</span>
+        </button>
+        <button id="modeText" class="btn" title="وضع النص" aria-label="وضع النص">
+          <span class="material-symbols-outlined" aria-hidden="true">text_fields</span>
+        </button>
+      </div>
+
+      <!-- منطقة النص -->
+      <div id="textEditor" hidden>
+        <textarea id="noteText" placeholder="اكتب ملاحظتك هنا..."></textarea>
+        <div>
+          <button id="saveNote" class="btn primary">حفظ الملاحظة</button>
+        </div>
+      </div>
+
+      <!-- منطقة الرسم -->
+      <div id="drawEditor" hidden>
+        <!-- نعطي أبعاد ابتدائية كي يشتغل بدون CSS -->
+        <canvas id="drawCanvas" width="600" height="360"></canvas>
+        <div>
+          <button id="clearCanvas" class="btn">مسح الرسم</button>
+          <button id="saveDrawing" class="btn primary">حفظ الرسم</button>
+        </div>
+      </div>
+
+      <!-- المداخلات المحفوظة -->
+      <div id="entries"></div>
     </section>
   </main>
 
